@@ -1,7 +1,5 @@
 package src;
 
-import java.util.Arrays;
-
 public class Zamowienie {
     private int id;
     private Klient klient;
@@ -9,9 +7,10 @@ public class Zamowienie {
     private int[] ilosci;
     private String dataZamowienia;
     private String status;
+    private double wartosc;
 
-    // Konstruktor
-    public Zamowienie(int id, Klient klient, Produkt[] produkty, int[] ilosci, String dataZamowienia, String status) {
+
+    public Zamowienie() {
         this.id = id;
         this.klient = klient;
         this.produkty = produkty;
@@ -19,6 +18,7 @@ public class Zamowienie {
         this.dataZamowienia = dataZamowienia;
         this.status = status;
     }
+
     public int getId() {
         return id;
     }
@@ -66,36 +66,42 @@ public class Zamowienie {
     public void setStatus(String status) {
         this.status = status;
     }
-    public double obliczWartoscZamowienia() {
-        double suma = 0;
-        for (int i = 0; i < produkty.length; i++) {
-            suma += produkty[i].getCena() * ilosci[i];
-        }
-        return suma;
+
+    public double getWartosc() {
+        return wartosc;
     }
-    public void zastosujZnizke() {
-        if (klient.isStaly()) {
-            double wartosc = obliczWartoscZamowienia();
-            double zniżka = wartosc * 0.10;
-            System.out.println("Zniżka dla stałego klienta: " + zniżka);
-            System.out.println("Wartość zamówienia po zniżce: " + (wartosc - zniżka));
-        } else {
-            System.out.println("Brak zniżki, klient nie jest stały.");
+
+    public void setWartosc(double wartosc) {
+        this.wartosc = wartosc;
+    }
+
+    public void obliczWartoscZamowienia() {
+        for (int x = 0; x < produkty.length; x++) {
+            if (produkty[x] != null) {
+                wartosc += produkty[x].getCena() * ilosci[x];
+            }
         }
     }
 
+    public void zastosujZnizke() {
+        if (klient.isCzyStaly()) {
+            wartosc *= 0.9;
+        }
+    }
 
     public void wyswietlSzczegoly() {
+        int ile = 0;
+        for (int x = 0; x < ilosci.length; x++) {
+            ile += ilosci[x];
+        }
         System.out.println("Szczegóły zamówienia:");
         System.out.println("ID zamówienia: " + id);
         System.out.println("Klient: " + klient.getImie() + " " + klient.getNazwisko());
         System.out.println("Data zamówienia: " + dataZamowienia);
         System.out.println("Status: " + status);
-        System.out.println("Produkty:");
-        for (int i = 0; i < produkty.length; i++) {
-            System.out.println(produkty[i].getNazwa() + " - Ilość: " + ilosci[i] + " - Cena: " + produkty[i].getCena());
-        }
-        System.out.println("Łączna wartość zamówienia: " + obliczWartoscZamowienia());
-
+        System.out.println("Produkty:" + produkty.length);
+        System.out.println("Ilość: " + ile);
+        System.out.println("Wartość: " + wartosc);
     }
 }
+

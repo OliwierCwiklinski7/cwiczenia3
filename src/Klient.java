@@ -7,7 +7,7 @@ public class Klient {
     private String email;
     private boolean czyStaly;
 
-    public Klient(int id, String imie, String nazwisko, String email, boolean czyStaly) {
+    public Klient() {
         this.id = id;
         this.imie = imie;
         this.nazwisko = nazwisko;
@@ -61,15 +61,5 @@ public class Klient {
         System.out.println("Nazwisko: " + nazwisko);
         System.out.println("Email: " + email);
         System.out.println("Czy stały klient: " + (czyStaly ? "Tak" : "Nie"));
-    }
-
-    public boolean isStaly() {
-    }
-
-    public class Main {
-        public static void main(String[] args) {
-            Klient klient = new Klient(1, "Jan", "Kowalski", "jan.kowalski@example.com", true);
-            klient.wyswietlInformacje();
-        }
     }
 }

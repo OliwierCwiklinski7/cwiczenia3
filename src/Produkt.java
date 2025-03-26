@@ -61,11 +61,6 @@ public class Produkt {
         System.out.println("Cena: " + cena + " PLN");
         System.out.println("Ilość w magazynie: " + iloscWMagazynie);
     }
-
-    public static void main(String[] args) {
-        Produkt laptop = new Produkt();
-        laptop.wyswietlInformacje();
-    }
 }
 
 
